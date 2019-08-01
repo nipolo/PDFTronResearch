@@ -1,0 +1,48 @@
+<header>
+  <div class="title sample">Page operations sample</div>
+</header>
+<aside>
+  <ng-container [formGroup]="pageManipulationForm">
+    <h1>Controls</h1>
+    <h2>Edit a page</h2>
+    <select formControlName="editPage">
+      <option *ngFor="let page of pages" [value]="page">
+        {{page}}
+      </option>
+    </select>
+    <button (click)="rotatePage()">Rotate</button>
+    <button (click)="cropPages()">Crop</button>
+    <button (click)="deletePages()">Delete</button>
+    <br />
+    <h2>Move a page</h2>
+    <select formControlName="moveFromPage">
+      <option *ngFor="let page of pages" [value]="page">
+        {{page}}
+      </option>
+    </select>
+    <h2>to</h2>
+    <select formControlName="moveToPage">
+      <option *ngFor="let page of pages" [value]="page">
+        {{page}}
+      </option>
+    </select>
+    <button (click)="reorderPages()">Apply</button>
+    <br />
+    <h2>Insert a blank page</h2>
+    <select formControlName="insertAtPage">
+      <option *ngFor="let page of pagesForInsert" [value]="page">
+        {{page}}
+      </option>
+    </select>
+    <button (click)="insertBlankPage()">Apply</button>
+    <br />
+    <h2>Merge another document</h2>
+    <input (change)="mergeWithFile($event)" type='file' accept='.pdf,.jpg,.jpeg,.png,.docx,.xlsx,.pptx,.md' />
+    <h2>Upload to server</h2>
+    <button (click)="upload()">Upload</button>
+    <hr />
+    <h1>Instructions</h1>
+    <p>Use the dropdown to select a page number, and buttons to do page operations.</p>
+  </ng-container>
+</aside>
+<div #viewer class="viewer"></div>
