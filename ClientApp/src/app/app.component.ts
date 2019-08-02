@@ -95,7 +95,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.document.cropPages([Number(this.editPageControl.value)], 40, 40, 40, 40);
   }
 
-  deletePages = function () {
+  deletePages() {
     var newPageCount = this.document.getPageCount() - 1;
 
     // Delete pages
@@ -165,7 +165,10 @@ export class AppComponent implements OnInit, AfterViewInit {
         type: 'application/pdf'
       });
 
-      this._http.post('/api/file/Upload', blob).subscribe();
+      const formData = new FormData();
+      var file = new File([blob], "name");
+      formData.append('file', file, 'test');
+      this._http.post('/api/file/Upload', formData).subscribe();
     });
   }
 }

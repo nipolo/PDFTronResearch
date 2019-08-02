@@ -35,6 +35,7 @@ namespace PDFTronAPI
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                env.WebRootPath = @"C:\Users\bvalkov\Documents\Codes and projects\CSharp projects\Common Web APIs\PDFTronAPI\Downloads\";
             }
             else
             {

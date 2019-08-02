@@ -27,6 +27,7 @@
 
   <ItemGroup>
     <Folder Include="ClientApp\" />
+    <Folder Include="Downloads\" />
   </ItemGroup>
 
   <ItemGroup>

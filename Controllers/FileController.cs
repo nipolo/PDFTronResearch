@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.IO;
 
 namespace PDFTronAPI.Controllers
 {
@@ -7,15 +9,22 @@ namespace PDFTronAPI.Controllers
     [ApiController]
     public class FileController : ControllerBase
     {
-        [HttpPost("[action]")]
-        public IActionResult Upload([FromBody] IFormFile file)
+        private IHostingEnvironment hostingEnvironment;
+        private string appRootFolder;
+
+        public FileController(IHostingEnvironment env)
         {
+            hostingEnvironment = env;
+        }
+
+        [HttpPost("[action]")]
+        public IActionResult Upload()
+        {
+            using (var stream = new FileStream(Path.Combine(hostingEnvironment.WebRootPath, "test.pdf"), FileMode.Create))
+            {
+                Request.Body.CopyTo(stream);
+            }
             return Ok();
         }
-    }
-
-    public class Payload
-    {
-        public int File;
     }
 }
